@@ -1,0 +1,69 @@
+/*SELECT  c.nome, c.estado, c.cidade,(
+        SELECT 
+             STRING_AGG(t.titulo, ', ') 
+        FROM 
+            tags t, cadastros_tag ct
+        WHERE 
+            ct.cadastro_id = c.id
+            AND ct.tag_id = t.id
+    ) AS tags
+FROM 
+    cadastros c;*/
+
+
+	--SELECT * FROM lancamentos;
+
+/*SELECT 
+    (SELECT nome FROM cadastros c WHERE c.id = l.cadastro_id) AS nome, 
+    (SELECT cpfcnpj FROM cadastros c WHERE c.id = l.cadastro_id) AS documento, 
+    l.descricao, 
+    l.liquidacao, 
+    l.valor_liquidado
+FROM 
+    lancamentos l
+WHERE 
+     l.status = 'liquidado' 
+    AND l.liquidacao BETWEEN '2024-01-01' AND '2024-12-31';*/
+
+
+/*SELECT 
+    TO_CHAR(l.liquidacao, 'YYYY-MM') AS mes, 
+    (SELECT cat.titulo FROM categoria cat WHERE cat.id = l.categoria_id) AS titulo,
+    SUM(l.valor_liquidado) AS total_receita
+FROM 
+    lancamentos l
+WHERE 
+    l.status = 'liquidado'
+GROUP BY 
+    mes, titulo
+ORDER BY 
+    mes, titulo;
+*/
+
+/*SELECT 
+    (SELECT c.nome FROM cadastros c WHERE c.id = l.cadastro_id) AS nome, 
+    (SELECT c.cpfcnpj FROM cadastros c WHERE c.id = l.cadastro_id) AS cpfcnpj, 
+    l.descricao, 
+    l.vencimento, 
+    l.valor
+FROM 
+    lancamentos l
+WHERE 
+    l.tipo = 'receber' 
+    AND l.status = 'aberto';
+*/
+
+/*SELECT 
+    TO_CHAR(l.liquidacao, 'YYYY-MM') AS mes, 
+    (SELECT cat.titulo FROM categoria cat WHERE cat.id = l.categoria_id) AS titulo,
+    SUM(l.valor_liquidado) AS total_despesa
+FROM 
+    lancamentos l
+WHERE 
+    l.tipo = 'pagar' 
+    AND l.status = 'liquidado'
+GROUP BY 
+    mes, titulo
+ORDER BY 
+    mes, titulo;
+*/
